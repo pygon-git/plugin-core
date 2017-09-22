@@ -25,13 +25,13 @@
     },
     "autoload": {
         "psr-4": {
-            "PygonGit\\Core\\": "src"
+            "PygonGit\\PluginCore\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PygonGit\\Core\\Test\\": "tests",
-            "Cake\\Test\\" : "vendor/cakephp/cakephp/test"
+            "PygonGit\\PluginCore\\Test\\": "tests",
+            "Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
         }
     }
 }
