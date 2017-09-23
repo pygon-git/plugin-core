@@ -22,7 +22,10 @@
         "cakephp/migrations": "~1.0",
         "cakephp/plugin-installer": "~1.0",
         "josegonzalez/dotenv": "2.*",
-        "friendsofcake/bootstrap-ui": "^1.2"
+        "friendsofcake/bootstrap-ui": "^1.2",
+        "twbs/bootstrap": "^3.3",
+        "components/jquery": "^3.2",
+        "cakephp/bake": "^1.4"
     },
     "autoload": {
         "psr-4": {
