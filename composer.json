@@ -40,6 +40,7 @@
     },
     "scripts": {
         "post-install-cmd": "PygonGit\\PluginCore\\Console\\Installer::postInstall",
+        "post-update-cmd": "PygonGit\\PluginCore\\Console\\Installer::postUpdate",
         "post-create-project-cmd": "PygonGit\\PluginCore\\Console\\Installer::postInstall"
     }
 }

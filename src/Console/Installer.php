@@ -37,6 +37,12 @@ class Installer
         static::linkVendorAssets($event);
     }
 
+    public static function postUpdate(Event $event)
+    {
+        static::linkVendorAssets($event);
+        $io->write('We are updated.');
+    }
+
     /**
      * links the vendor assets to the webroot for the css/js files
      *
