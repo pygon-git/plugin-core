@@ -39,7 +39,10 @@ class Installer
 
     public static function postUpdate(Event $event)
     {
+        $io = $event->getIO();
+
         static::linkVendorAssets($event);
+
         $io->write('We are updated.');
     }
 
