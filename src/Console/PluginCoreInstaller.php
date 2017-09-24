@@ -81,7 +81,6 @@ class PluginCoreInstaller
         else
         {
             $io->write('Linking Vendor Assets');
-            $io->write(ROOT);
 
             symlink(ROOT.DS.'vendor', WWW_ROOT.DS.'assets');
         }

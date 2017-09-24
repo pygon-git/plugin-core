@@ -32,7 +32,7 @@ if (!$this->fetch('tb_footer')) {
 /**
  * Default `body` block.
  */
-$this->prepend('tb_body_attrs', ' class="' . implode(' ', [$this->request->controller, $this->request->action]) . '" ');
+$this->prepend('tb_body_attrs', ' class="' . strtolower(implode('-', [$this->request->controller, $this->request->action])) . '" ');
 if (!$this->fetch('tb_body_start')) {
     $this->start('tb_body_start');
     echo '<body' . $this->fetch('tb_body_attrs') . '>';
@@ -72,14 +72,19 @@ $html5Shim =
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 HTML;
-$this->prepend('css', $this->Html->css(['Bootstrap.dist/js/bootstrap']));
+$this->prepend('css', $this->Html->css([
+    '/assets/twbs/bootstrap/dist/css/bootstrap.css'
+]));
 
 $this->append('css', $html5Shim);
 
 /**
  * Prepend `script` block with jQuery and Bootstrap scripts
  */
-$this->prepend('script', $this->Html->script(['jquery/jquery', 'bootstrap/bootstrap']));
+$this->prepend('script', $this->Html->script([
+    '/assets/components/jquery/jquery.js',
+    '/assets/twbs/bootstrap/dist/js/bootstrap.js'
+]));
 
 ?>
 <!DOCTYPE html>
