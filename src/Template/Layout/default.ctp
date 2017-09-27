@@ -32,7 +32,7 @@ if (!$this->fetch('tb_footer')) {
 /**
  * Default `body` block.
  */
-$this->prepend('tb_body_attrs', ' class="' . strtolower(implode('-', [$this->request->controller, $this->request->action])) . '" ');
+$this->prepend('tb_body_attrs', ' class="' . strtolower(implode('-', [$this->request->controller, $this->request->action])) . ' layout-default"' );
 if (!$this->fetch('tb_body_start')) {
     $this->start('tb_body_start');
     echo '<body' . $this->fetch('tb_body_attrs') . '>';
@@ -83,8 +83,11 @@ $this->append('css', $html5Shim);
  */
 $this->prepend('script', $this->Html->script([
     '/assets/components/jquery/jquery.js',
-    '/assets/twbs/bootstrap/dist/js/bootstrap.js'
+    '/assets/twbs/bootstrap/assets/js/vendor/popper.min.js',
+    '/assets/twbs/bootstrap/dist/js/bootstrap.js',
+    '/assets/twbs/bootstrap/assets/js/ie10-viewport-bug-workaround.js'
 ]));
+
 
 ?>
 <!DOCTYPE html>
@@ -113,4 +116,3 @@ $this->prepend('script', $this->Html->script([
     ?>
 
 </html>
-

@@ -2,18 +2,22 @@
 
 namespace PygonGit\PluginCore\View;
 
-use Cake\View\View;
-use BootstrapUI\View\UIViewTrait;
 
-
-class PluginCoreView extends View
+class PluginCoreView extends \Cake\View\View
 {
-    use UIViewTrait;
 
     public function initialize()
     {
         parent::initialize();
 
-        $this->initializeUI(['layout' => 'PygonGit/PluginCore.default']);
+        $this->layout = 'PygonGit/PluginCore.default';
+
+        $this->loadHelper('Html', ['className' => 'PygonGit/PluginCore.Html']);
+        $this->loadHelper('Form', ['className' => 'PygonGit/PluginCore.Form']);
+        $this->loadHelper('Flash', ['className' => 'PygonGit/PluginCore.Flash']);
+        $this->loadHelper('Paginator', ['className' => 'PygonGit/PluginCore.Paginator']);
+        if (class_exists('\Cake\View\Helper\BreadcrumbsHelper')) {
+            $this->loadHelper('Breadcrumbs', ['className' => 'PygonGit/PluginCore.Breadcrumbs']);
+        }
     }
 }
