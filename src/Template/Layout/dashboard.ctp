@@ -9,13 +9,15 @@ $this->start('tb_body_start');
 <body <?= $this->fetch('tb_body_attrs') ?>>
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#"></a>
+        <a class="navbar-brand" href="#"><?= Configure::read('App.title') ?></a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
+                <?= $this->fetch('tb_topbar') ?>
+                <!--
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
@@ -28,7 +30,7 @@ $this->start('tb_body_start');
                 <li class="nav-item">
                     <a class="nav-link" href="#">Help</a>
                 </li>
-                <?= $this->fetch('tb_actions_header') ?>
+                -->
             </ul>
             <form class="form-inline mt-2 mt-md-0">
                 <input class="form-control mr-sm-2" placeholder="Search" aria-label="Search" type="text">

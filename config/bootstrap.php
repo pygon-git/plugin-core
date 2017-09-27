@@ -11,4 +11,6 @@ try {
     exit($e->getMessage() . "\n");
 }
 
+Plugin::load('Migrations');
 Plugin::load('BootstrapUI');
+Plugin::load('Cake/ElasticSearch', ['bootstrap' => true]);
