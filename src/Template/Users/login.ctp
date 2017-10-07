@@ -10,7 +10,7 @@
  */
 
 use Cake\Core\Configure;
-
+$this->extend('PygonGit/PluginCore.Layout/signin');
 ?>
 <div class="users form">
     <?= $this->Flash->render('auth') ?>

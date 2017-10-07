@@ -34,6 +34,7 @@ Configure::write('Users.Social.login', true); //to enable social login
 Configure::write('Users.GoogleAuthenticator.login', true);
 Configure::write('OAuth.providers.facebook.options.clientId', '536639270007034');
 Configure::write('OAuth.providers.facebook.options.clientSecret', 'ade8b402cb34fae5c24f6978631bdfd1');
+Configure::write('OAuth.providers.facebook.options.graphApiVersion', 'v2.8');
 
 Configure::write('OAuth.providers.twitter.options.clientId', '18nzzMJ3dEUbJO2HgClcDMLU8');
 Configure::write('OAuth.providers.twitter.options.clientSecret', 'wKrfiZAnCaORzFpKy8wQAiTo7XRNfpqVDSlibQoMAqk4MKpq6Q');
