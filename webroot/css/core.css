@@ -1,0 +1,26 @@
+
+/* generic tweaks */
+.fade {
+    opacity: 1 !important;
+}
+
+/* Login Form
+i.fa-facebook,
+i.fa-twitter {
+    width: 1.28571429em;
+    text-align: center;
+}
+.form-signin {
+    background-color: #FFF;
+}
+.form-signin h1 {
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: -0.5px;
+    text-align: center;
+}
+.form-signin .form-group input[type="email"],
+.form-signin .form-group input[type="password"] {
+    margin-bottom: 0;
+}
+*/

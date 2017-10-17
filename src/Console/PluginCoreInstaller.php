@@ -29,19 +29,36 @@ class PluginCoreInstaller
      * Does some routine installation tasks so people don't have to.
      *
      * @param \Composer\Script\Event $event The composer event object.
-     * @throws \Exception Exception raised by validator.
+     * @param string $dir The application's root directory.
      * @return void
      */
-    public static function postInstall(Event $event)
-    {
-        static::linkVendorAssets($event);
-    }
-
-    public static function postUpdate(Event $event)
+    public static function postInstall(Event $event, $rootDir)
     {
         $io = $event->getIO();
 
+        require $rootDir.DIRECTORY_SEPARATOR."config".DIRECTORY_SEPARATOR."paths.php";
+
         static::linkVendorAssets($event);
+        static::createUserConfig($rootDir);
+
+        $io->write('PygonGit\PluginCore is installed.');
+    }
+
+    /**
+     * Runs post update methods/actions
+     *
+     * @param \Composer\Script\Event $event
+     * @param string $dir The application's root directory.
+     * @return void
+     */
+    public static function postUpdate(Event $event, $rootDir)
+    {
+        $io = $event->getIO();
+
+        require $rootDir.DIRECTORY_SEPARATOR."config".DIRECTORY_SEPARATOR."paths.php";
+
+        static::linkVendorAssets($event);
+        static::createUserConfig($event, $rootDir);
 
         $io->write('PygonGit\PluginCore is updated.');
     }
@@ -49,7 +66,6 @@ class PluginCoreInstaller
     /**
      * links the vendor assets to the webroot for the css/js files
      *
-     * @param string $dir The application's root directory.
      * @param \Composer\Script\Event $event
      * @return void
      */
@@ -57,8 +73,6 @@ class PluginCoreInstaller
     {
         $io = $event->getIO();
         $io->write('Checking Vendor Assets');
-
-        require "config".DIRECTORY_SEPARATOR."paths.php";
 
         $isLinked = false;
 
@@ -85,5 +99,31 @@ class PluginCoreInstaller
             symlink(ROOT.DS.'vendor', WWW_ROOT.DS.'assets');
         }
 
+    }
+
+    /**
+     * Create the config/user.php file if it does not exist.
+     *
+     * @param string $dir The application's root directory.
+     * @return void
+     */
+    public static function createUserConfig(Event $event, $dir)
+    {
+        $io = $event->getIO();
+        $io->write('Checking Users Config');
+
+        $rootDir = dirname(dirname(__DIR__));
+
+        $appConfig = $dir.DS.'config'.DS.'users.php';
+        $defaultConfig = $rootDir.DS.'config'.DS.'users.default.php';
+        if (!file_exists($appConfig))
+        {
+            copy($defaultConfig, $appConfig);
+            $io->write('Created `config/users.php` file');
+        }
+        else
+        {
+            $io->write('`config/users.php` file already exists.');
+        }
     }
 }

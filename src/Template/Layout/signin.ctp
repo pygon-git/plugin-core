@@ -1,6 +1,9 @@
 <?php
+
+use Cake\Core\Configure;
+
 /* @var $this \Cake\View\View */
-$this->Html->css('BootstrapUI.signin', ['block' => true]);
+//$this->Html->css('BootstrapUI.signin', ['block' => true]);
 $this->prepend('tb_body_attrs', ' class="' . strtolower(implode('-', [$this->request->controller, $this->request->action])) . ' layout-signin" ');
 $this->start('tb_body_start');
 /**
@@ -14,7 +17,16 @@ if (!$this->fetch('tb_flash')) {
 }
 ?>
 <body <?= $this->fetch('tb_body_attrs') ?>>
-    <div class="container">
+
+        <div class="wrapper-page">
+            <div class="text-center">
+                <?= $this->Html->link(
+                    $this->Html->icon('fa-home').
+                    $this->html->tag('span', Configure::read('App.title')),
+                    ['plugin' => null, 'controller' => 'pages', 'action' => 'display', 'home'],
+                    ['class' => 'logo-lg', 'escape' => false]
+                ); ?>
+            </div>
 <?php
 $this->end();
 

@@ -10,3 +10,4 @@ Router::plugin(
         $routes->fallbacks(DashedRoute::class);
     }
 );
+Router::connect('/register', ['plugin' => 'CakeDC/Users', 'controller' => 'Users', 'action' => 'register']);

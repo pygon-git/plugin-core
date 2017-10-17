@@ -9,7 +9,7 @@
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 use Cake\Core\Configure;
-$this->extend('PygonGit/PluginCore.Layout/dashboard');
+$this->extend('PygonGit/PluginCore.Layout/signin');
 ?>
 <div class="users form large-10 medium-9 columns">
     <?= $this->Form->create($user); ?>

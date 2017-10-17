@@ -25,14 +25,14 @@ if (!$this->fetch('title')) {
  */
 if (!$this->fetch('tb_footer')) {
     $this->start('tb_footer');
-    printf('&copy;%s %s %s', date('Y'), Configure::read('App.title'), '<!-- here to pass tests - built using CakePHP -->');
+    echo " ";
     $this->end();
 }
 
 /**
  * Default `body` block.
  */
-$this->prepend('tb_body_attrs', ' class="' . strtolower(implode('-', [$this->request->controller, $this->request->action])) . ' layout-default"' );
+$this->prepend('tb_body_attrs', ' class="fixed-left ' . strtolower(implode('-', [$this->request->controller, $this->request->action])) . ' layout-default"' );
 if (!$this->fetch('tb_body_start')) {
     $this->start('tb_body_start');
     echo '<body' . $this->fetch('tb_body_attrs') . '>';
@@ -57,7 +57,7 @@ if (!$this->fetch('tb_body_end')) {
  * Prepend `meta` block with `author` and `favicon`.
  */
 $this->prepend('meta', $this->Html->meta('author', null, ['name' => 'author', 'content' => Configure::read('App.author')]));
-$this->prepend('meta', $this->Html->meta('favicon.ico', '/favicon.ico', ['type' => 'icon']));
+// $this->prepend('meta', $this->Html->meta('favicon.ico', '/favicon.ico', ['type' => 'icon']));
 
 /**
  * Prepend `css` block with Bootstrap stylesheets and append
@@ -73,7 +73,11 @@ $html5Shim =
     <![endif]-->
 HTML;
 $this->prepend('css', $this->Html->css([
-    '/assets/twbs/bootstrap/dist/css/bootstrap.css'
+    '/assets/pygon-git/plugin-core/webroot/css/bootstrap.min.css',
+    '/assets/pygon-git/plugin-core/webroot/plugins/switchery/switchery.min.css',
+    '/assets/pygon-git/plugin-core/webroot/css/icons.css',
+    '/assets/pygon-git/plugin-core/webroot/css/style.css',
+    '/assets/pygon-git/plugin-core/webroot/css/core.css',
 ]));
 
 $this->append('css', $html5Shim);
@@ -82,10 +86,21 @@ $this->append('css', $html5Shim);
  * Prepend `script` block with jQuery and Bootstrap scripts
  */
 $this->prepend('script', $this->Html->script([
-    '/assets/components/jquery/jquery.js',
-    '/assets/twbs/bootstrap/assets/js/vendor/popper.min.js',
-    '/assets/twbs/bootstrap/dist/js/bootstrap.js',
-    '/assets/twbs/bootstrap/assets/js/ie10-viewport-bug-workaround.js'
+    '/assets/pygon-git/plugin-core/webroot/js/modernizr.min.js',
+    '/assets/pygon-git/plugin-core/webroot/js/jquery.min.js',
+    '/assets/pygon-git/plugin-core/webroot/js/popper.min.js',
+    '/assets/pygon-git/plugin-core/webroot/js/bootstrap.min.js',
+//    '/assets/twbs/bootstrap/assets/js/ie10-viewport-bug-workaround.js',
+    '/assets/pygon-git/plugin-core/webroot/js/detect.js',
+    '/assets/pygon-git/plugin-core/webroot/js/fastclick.js',
+    '/assets/pygon-git/plugin-core/webroot/js/waves.js',
+    '/assets/pygon-git/plugin-core/webroot/js/wow.min.js',
+    '/assets/pygon-git/plugin-core/webroot/js/jquery.slimscroll.js',
+    '/assets/pygon-git/plugin-core/webroot/js/jquery.scrollTo.min.js',
+    '/assets/pygon-git/plugin-core/webroot/plugins/switchery/switchery.min.js',
+    '/assets/pygon-git/plugin-core/webroot/js/jquery.core.js',
+    '/assets/pygon-git/plugin-core/webroot/js/jquery.app.js',
+    '/assets/pygon-git/plugin-core/webroot/js/core.js',
 ]));
 
 
@@ -97,7 +112,8 @@ $this->prepend('script', $this->Html->script([
     <head>
 
         <?= $this->Html->charset() ?>
-        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
         <title><?= $this->fetch('title') ?></title>
 
@@ -111,6 +127,7 @@ $this->prepend('script', $this->Html->script([
     echo $this->fetch('tb_flash');
     echo $this->fetch('content');
     echo $this->fetch('tb_footer');
+    ?><script> var resizefunc = []; </script><?php
     echo $this->fetch('script');
     echo $this->fetch('tb_body_end');
     ?>

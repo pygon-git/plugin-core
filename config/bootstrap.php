@@ -23,15 +23,17 @@ Plugin::load('Migrations');
 Plugin::load('BootstrapUI');
 Plugin::load('Cake/ElasticSearch', ['bootstrap' => true]);
 
-// User management from the CakeDC 
+// User management from the CakeDC
 Configure::write('Users.config', ['users']);
 Plugin::load('CakeDC/Users', ['routes' => true, 'bootstrap' => true]);
 
+Configure::write('Users.Registration.active', false);
 Configure::write('Auth.authenticate.Form.fields.username', 'email'); // use their email instead of a username
 
-// allow social logins // All of the keays are test keys and route to a non-public website
-Configure::write('Users.Social.login', true); //to enable social login
-Configure::write('Users.GoogleAuthenticator.login', true);
+// allow social logins // All of the keys are test keys and route to a non-public website
+Configure::write('Users.Social.login', false); //to enable social login
+
+Configure::write('Users.GoogleAuthenticator.login', false);
 Configure::write('OAuth.providers.facebook.options.clientId', '536639270007034');
 Configure::write('OAuth.providers.facebook.options.clientSecret', 'ade8b402cb34fae5c24f6978631bdfd1');
 Configure::write('OAuth.providers.facebook.options.graphApiVersion', 'v2.8');
