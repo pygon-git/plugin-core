@@ -36,13 +36,17 @@ class PluginCoreInstaller
     {
         $io = $event->getIO();
 
-        $rootDir = dirname(dirname(__DIR__));
+        $rootDir = dirname(dirname(dirname(dirname(dirname(__DIR__)))));
         $io->write('PygonGit\PluginCore: $rootDir: '+$rootDir);
 
         require $rootDir.DIRECTORY_SEPARATOR."config".DIRECTORY_SEPARATOR."paths.php";
 
         static::linkVendorAssets($event);
-        static::createUserConfig($rootDir);
+        static::createUserConfig($event, $rootDir);
+
+        if (class_exists('\Cake\Codeception\Console\Installer')) {
+            \Cake\Codeception\Console\Installer::customizeCodeceptionBinary($event);
+        }
 
         $io->write('PygonGit\PluginCore is installed.');
     }
@@ -58,13 +62,17 @@ class PluginCoreInstaller
     {
         $io = $event->getIO();
 
-        $rootDir = dirname(dirname(__DIR__));
+        $rootDir = dirname(dirname(dirname(dirname(dirname(__DIR__)))));
         $io->write('PygonGit\PluginCore: $rootDir: '+$rootDir);
 
         require $rootDir.DIRECTORY_SEPARATOR."config".DIRECTORY_SEPARATOR."paths.php";
 
         static::linkVendorAssets($event);
         static::createUserConfig($event, $rootDir);
+
+        if (class_exists('\Cake\Codeception\Console\Installer')) {
+            \Cake\Codeception\Console\Installer::customizeCodeceptionBinary($event);
+        }
 
         $io->write('PygonGit\PluginCore is updated.');
     }
@@ -119,7 +127,7 @@ class PluginCoreInstaller
         $io = $event->getIO();
         $io->write('Checking Users Config');
 
-        $rootDir = dirname(dirname(__DIR__));
+        $rootDir = dirname(dirname(dirname(dirname(dirname(__DIR__)))));
         $io->write('PygonGit\PluginCore: $rootDir: '+$rootDir);
 
         $appConfig = $dir.DS.'config'.DS.'users.php';

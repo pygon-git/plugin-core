@@ -50,21 +50,17 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "PygonGit\\PluginCore\\Test\\": "tests",
-            "Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
+            "PygonGit\\PluginCore\\Test\\": "tests"
         }
     },
     "scripts": {
         "post-install-cmd": [
-            "\\Cake\\Codeception\\Console\\Installer::customizeCodeceptionBinary",
             "\\PygonGit\\PluginCore\\Console\\PluginCoreInstaller::postInstall"
         ],
         "post-create-project-cmd": [
-            "\\Cake\\Codeception\\Console\\Installer::customizeCodeceptionBinary",
             "\\PygonGit\\PluginCore\\Console\\PluginCoreInstaller::postInstall"
         ],
         "post-update-cmd": [
-            "\\Cake\\Codeception\\Console\\Installer::customizeCodeceptionBinary",
             "\\PygonGit\\PluginCore\\Console\\PluginCoreInstaller::postUpdate"
         ],
         "post-autoload-dump": "Cake\\Composer\\Installer\\PluginInstaller::postAutoloadDump",
