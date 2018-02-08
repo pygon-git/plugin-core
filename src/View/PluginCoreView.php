@@ -19,5 +19,6 @@ class PluginCoreView extends \Cake\View\View
             $this->loadHelper('Breadcrumbs', ['className' => 'PygonGit/PluginCore.Breadcrumbs']);
         }
         $this->loadHelper('Nav', ['className' => 'PygonGit/PluginCore.Nav']);
+        $this->loadHelper('Table', ['className' => 'PygonGit/PluginCore.Table']);
     }
 }

@@ -6,10 +6,12 @@ namespace PygonGit\PluginCore\Controller;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
 use Cake\View\CellTrait;
+use PygonGit\PluginCore\Controller\Traits\CrudTrait;
 
 class BaseController extends Controller
 {
     use CellTrait;
+    use CrudTrait;
 
     /**
      * Initialization hook method.

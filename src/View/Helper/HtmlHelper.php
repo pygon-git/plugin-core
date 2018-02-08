@@ -31,6 +31,7 @@ class HtmlHelper extends \BootstrapUI\View\Helper\HtmlHelper
         if(isset($options['noti']))
         {
             $options['class']['noti-icon'] = 'noti-icon';
+            unset($options['noti']);
         }
 
         $options['class'] = implode(' ', $options['class']);
@@ -49,11 +50,13 @@ class HtmlHelper extends \BootstrapUI\View\Helper\HtmlHelper
         if(isset($options['color']))
         {
             $options['class']['badge-'.$options['color']] = 'badge-'.$options['color'];
+            unset($options['color']);
         }
 
         if(isset($options['noti']))
         {
             $options['class']['noti-icon-badge'] = 'noti-icon-badge';
+            unset($options['noti']);
         }
 
         $options['class'] = implode(' ', $options['class']);

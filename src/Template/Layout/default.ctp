@@ -73,8 +73,11 @@ $html5Shim =
     <![endif]-->
 HTML;
 $this->prepend('css', $this->Html->css([
-    '/assets/pygon-git/plugin-core/webroot/css/bootstrap.min.css',
+    '/assets/pygon-git/plugin-core/webroot/plugins/datatables/dataTables.bootstrap4.min.css',
+    '/assets/pygon-git/plugin-core/webroot/plugins/datatables/responsive.bootstrap4.min.css',
+    '/assets/pygon-git/plugin-core/webroot/plugins/datatables/buttons.bootstrap4.min.css',
     '/assets/pygon-git/plugin-core/webroot/plugins/switchery/switchery.min.css',
+    '/assets/pygon-git/plugin-core/webroot/css/bootstrap.min.css',
     '/assets/pygon-git/plugin-core/webroot/css/icons.css',
     '/assets/pygon-git/plugin-core/webroot/css/style.css',
     '/assets/pygon-git/plugin-core/webroot/css/core.css',
@@ -97,6 +100,8 @@ $this->prepend('script', $this->Html->script([
     '/assets/pygon-git/plugin-core/webroot/js/wow.min.js',
     '/assets/pygon-git/plugin-core/webroot/js/jquery.slimscroll.js',
     '/assets/pygon-git/plugin-core/webroot/js/jquery.scrollTo.min.js',
+    '/assets/pygon-git/plugin-core/webroot/plugins/datatables/jquery.dataTables.min.js',
+    '/assets/pygon-git/plugin-core/webroot/plugins//datatables/dataTables.bootstrap4.min.js',
     '/assets/pygon-git/plugin-core/webroot/plugins/switchery/switchery.min.js',
     '/assets/pygon-git/plugin-core/webroot/js/jquery.core.js',
     '/assets/pygon-git/plugin-core/webroot/js/jquery.app.js',

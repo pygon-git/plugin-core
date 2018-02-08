@@ -32,9 +32,12 @@ class PluginCoreInstaller
      * @param string $dir The application's root directory.
      * @return void
      */
-    public static function postInstall(Event $event, $rootDir)
+    public static function postInstall(Event $event)
     {
         $io = $event->getIO();
+
+        $rootDir = dirname(dirname(__DIR__));
+        $io->write('PygonGit\PluginCore: $rootDir: '+$rootDir);
 
         require $rootDir.DIRECTORY_SEPARATOR."config".DIRECTORY_SEPARATOR."paths.php";
 
@@ -51,9 +54,12 @@ class PluginCoreInstaller
      * @param string $dir The application's root directory.
      * @return void
      */
-    public static function postUpdate(Event $event, $rootDir)
+    public static function postUpdate(Event $event)
     {
         $io = $event->getIO();
+
+        $rootDir = dirname(dirname(__DIR__));
+        $io->write('PygonGit\PluginCore: $rootDir: '+$rootDir);
 
         require $rootDir.DIRECTORY_SEPARATOR."config".DIRECTORY_SEPARATOR."paths.php";
 
@@ -90,7 +96,8 @@ class PluginCoreInstaller
 
         if($isLinked)
         {
-            $io->write('Vendor Assets already linked');
+            $io->write('Relinking Vendor Assets');
+            unlink(WWW_ROOT.DS.'assets');
         }
         else
         {
@@ -113,6 +120,7 @@ class PluginCoreInstaller
         $io->write('Checking Users Config');
 
         $rootDir = dirname(dirname(__DIR__));
+        $io->write('PygonGit\PluginCore: $rootDir: '+$rootDir);
 
         $appConfig = $dir.DS.'config'.DS.'users.php';
         $defaultConfig = $rootDir.DS.'config'.DS.'users.default.php';

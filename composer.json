@@ -37,6 +37,12 @@
         "google/recaptcha": "@stable",
         "robthree/twofactorauth": "^1.5.2"
     },
+    "require-dev": {
+        "psy/psysh": "@stable",
+        "cakephp/debug_kit": "~3.2",
+        "cakephp/bake": "~1.1",
+        "cakephp/cakephp-codesniffer": "^3.0"
+    },
     "autoload": {
         "psr-4": {
             "PygonGit\\PluginCore\\": "src"
@@ -47,5 +53,27 @@
             "PygonGit\\PluginCore\\Test\\": "tests",
             "Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
         }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "\\Cake\\Codeception\\Console\\Installer::customizeCodeceptionBinary",
+            "\\PygonGit\\PluginCore\\Console\\PluginCoreInstaller::postInstall"
+        ],
+        "post-create-project-cmd": [
+            "\\Cake\\Codeception\\Console\\Installer::customizeCodeceptionBinary",
+            "\\PygonGit\\PluginCore\\Console\\PluginCoreInstaller::postInstall"
+        ],
+        "post-update-cmd": [
+            "\\Cake\\Codeception\\Console\\Installer::customizeCodeceptionBinary",
+            "\\PygonGit\\PluginCore\\Console\\PluginCoreInstaller::postUpdate"
+        ],
+        "post-autoload-dump": "Cake\\Composer\\Installer\\PluginInstaller::postAutoloadDump",
+        "check": [
+            "@test",
+            "@cs-check"
+        ],
+        "cs-check": "phpcs --colors -p --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./src ./tests",
+        "cs-fix": "phpcbf --colors --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./src ./tests",
+        "test": "phpunit --colors=always"
     }
 }

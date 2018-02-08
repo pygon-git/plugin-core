@@ -10,8 +10,4 @@ class AppCell extends Cell
         parent::__construct($request, $response, $eventManager, $cellOptions);
         $this->viewBuilder()->autoLayout(false);
     }
-
-    public function display()
-    {
-    }
 }

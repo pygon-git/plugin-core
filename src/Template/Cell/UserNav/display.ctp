@@ -14,16 +14,29 @@
                         <li class="list-inline-item notification-list">
                             <?= $this->Nav->topLink(__('Toggle Full Screen'),
                                 '#',
-                                ['class' => ['right-bar-toggle' => 'right-bar-toggle'], 'icon' => 'mdi-dots-horizontal', 'iconOptions' => ['noti' => true]]
+                                [
+                                    'class' => ['right-bar-toggle' => 'right-bar-toggle'],
+                                    'icon' => 'mdi-dots-horizontal',
+                                    'iconOptions' => ['noti' => true]
+                                ]
                             ) ?>
                         </li>
 
                         <li class="list-inline-item dropdown notification-list">
-                            <a class="nav-link dropdown-toggle arrow-none waves-light waves-effect" data-toggle="dropdown" href="#" role="button"
-                               aria-haspopup="false" aria-expanded="false">
-                                <?= $this->Html->icon('mdi-bell', ['noti' => true]) ?>
-                                <?= $this->Html->badge('4', ['noti' => true, 'color' => 'pink']) ?>
-                            </a>
+                            <?= $this->Nav->topLink(__('4'),
+                                '#',
+                                [
+                                    'class' => ['dropdown-toggle' => 'dropdown-toggle', 'arrow-none' => 'arrow-none'],
+                                    'data-toggle' => 'dropdown',
+                                    'role' => 'button',
+                                    'aria-haspopup' => 'false',
+                                    'aria-expanded' => 'false',
+                                    'icon' => 'mdi-bell',
+                                    'iconOptions' => ['noti' => true],
+                                    'badge' => true,
+                                    'badgeOptions' => ['noti' => true, 'color' => 'pink']
+                                ]
+                            ) ?>
                             <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg" aria-labelledby="Preview">
                                 <!-- item-->
                                 <div class="dropdown-item noti-title">
@@ -57,10 +70,18 @@
                         </li>
 
                         <li class="list-inline-item dropdown notification-list">
-                            <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
-                               aria-haspopup="false" aria-expanded="false">
-                                <?= $this->Html->icon('mdi-account', ['noti' => true]) ?>
-                            </a>
+                            <?= $this->Nav->topLink(__('Account'),
+                                '#',
+                                [
+                                    'class' => ['dropdown-toggle' => 'dropdown-toggle', 'nav-user' => 'nav-user'],
+                                    'data-toggle' => 'dropdown',
+                                    'role' => 'button',
+                                    'aria-haspopup' => 'false',
+                                    'aria-expanded' => 'false',
+                                    'icon' => 'mdi-account',
+                                    'iconOptions' => ['noti' => true]
+                                ]
+                            ) ?>
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown " aria-labelledby="Preview">
                                 <!-- item-->
                                 <div class="dropdown-item noti-title">
@@ -68,10 +89,12 @@
                                 </div>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <?= $this->Html->icon('mdi-account-star-variant') ?>
-                                    <span>Profile</span>
-                                </a>
+                                <?= $this->Nav->dropdownLink(__('Profile'),
+                                    ['_name' => 'plugin-core:profile'],
+                                    [
+                                        'icon' => 'mdi-account-star-variant',
+                                    ]
+                                ) ?>
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
@@ -86,10 +109,12 @@
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <?= $this->Html->icon('mdi-logout') ?>
-                                    <span>Logout</span>
-                                </a>
+                                <?= $this->Nav->dropdownLink(__('Logout'),
+                                    ['_name' => 'plugin-core:logout'],
+                                    [
+                                        'icon' => 'mdi-logout',
+                                    ]
+                                ) ?>
 
                             </div>
                         </li>

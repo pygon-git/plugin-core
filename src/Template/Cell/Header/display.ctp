@@ -9,7 +9,12 @@ use Cake\Core\Configure;
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <div class="text-center">
-                        <a href="index.html" class="logo"><i class="mdi mdi-radar"></i> <span><?= Configure::read('App.title') ?></span></a>
+                        <?= $this->Html->link(
+                            $this->Html->icon('fa-home').
+                            $this->Html->tag('span', Configure::read('App.title')),
+                            ['_name' => 'home'],
+                            ['class' => 'logo', 'escape' => false]
+                        ) ?>
                     </div>
                 </div>
 

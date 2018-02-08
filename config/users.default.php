@@ -8,4 +8,6 @@ $config['Auth']['authorize']['Users.Superuser'] = [
         'superuser_field' => 'is_superuser',
     ];
 */
+$config['Users']['table'] = 'PygonGit/PluginCore.Users';
+$config['Users']['controller'] = 'PygonGit/PluginCore.Users';
 return $config;

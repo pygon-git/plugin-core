@@ -3,6 +3,12 @@
 use Cake\Core\Configure;
 
 
+if (!$this->fetch('page_title')) {
+    $this->start('page_title');
+        echo __($this->request->controller);
+    $this->end();
+}
+
 $this->prepend('tb_body_attrs', ' class="fixed-left ' . strtolower(implode('-', [$this->request->controller, $this->request->action])) . ' layout-dashboard" ');
 $this->start('tb_body_start');
 ?>
@@ -32,8 +38,7 @@ if (!$this->fetch('tb_flash')) {
                 <!-- Start content -->
                 <div class="content">
                     <div class="container-fluid">
-                        <?= $this->cell('PygonGit/PluginCore.Pagetitle')->render() ?>
-                        <div class="row">
+                        <?= $this->cell('PygonGit/PluginCore.Pagetitle', [$this->fetch('page_title')])->render() ?>
 
 
 <?php
@@ -42,7 +47,6 @@ $this->end();
 $this->start('tb_body_end');
 echo '</body>';
 $this->end();
-$this->append('content', '                        </div>');
 $this->append('content', '                    </div>');
 $this->append('content', '                </div>');
 $this->append('content', $this->cell('PygonGit/PluginCore.Footer')->render());
