@@ -16,7 +16,10 @@ try {
  * Debug Kit should not be installed on a production system
  */
 if (Configure::read('debug')) {
-    Plugin::load('DebugKit', ['bootstrap' => true]);
+    try {
+        Plugin::load('DebugKit', ['bootstrap' => true]);
+    } catch (\Exception $e) {
+    }
 }
 
 Plugin::load('Migrations');
@@ -31,7 +34,7 @@ Configure::write('Users.Registration.active', false);
 Configure::write('Auth.authenticate.Form.fields.username', 'email'); // use their email instead of a username
 
 // allow social logins // All of the keys are test keys and route to a non-public website
-Configure::write('Users.Social.login', false); //to enable social login
+Configure::write('Users.Social.login', true); //to enable social login
 
 Configure::write('Users.GoogleAuthenticator.login', false);
 Configure::write('OAuth.providers.facebook.options.clientId', '536639270007034');
