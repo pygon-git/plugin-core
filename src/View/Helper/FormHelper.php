@@ -112,12 +112,12 @@ class FormHelper extends \BootstrapUI\View\Helper\FormHelper
     {
         $links = [];
         if (Configure::read('Users.Email.required')) {
-            $links[] = $this->Html->tag('div', $this->Html->link($this->Html->icon('fa-lock m-r-5'). __('Forgot your password?'), ['action' => 'requestResetPassword'], ['escape' => false, 'class' => 'text-muted']), ['class' => 'col-sm-7']);
+            $links[] = $this->Html->tag('div', $this->Html->link($this->Html->icon('fa-lock m-r-5'). __('Forgot your password?'), ['_name' => 'plugin-core:password-reset-request'], ['escape' => false, 'class' => 'text-muted']), ['class' => 'col-sm-7']);
         }
         $registrationActive = Configure::read('Users.Registration.active');
         if ($registrationActive)
         {
-            $links[] = $this->Html->tag('div', $this->Html->link( __('Create an account'), ['action' => 'register'], ['escape' => false, 'class' => 'text-muted']), ['class' => 'col-sm-5 text-right']);
+            $links[] = $this->Html->tag('div', $this->Html->link( __('Create an account'), ['_name' => 'plugin-core:register'], ['escape' => false, 'class' => 'text-muted']), ['class' => 'col-sm-5 text-right']);
         }
 
         $socialLinks = $this->_View->User->socialLoginList([

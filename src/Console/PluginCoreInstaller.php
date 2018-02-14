@@ -14,8 +14,22 @@
  */
 namespace PygonGit\PluginCore\Console;
 
+define('BASE_PATH', realpath(dirname(dirname(dirname(dirname(dirname(__FILE__)))))));
+include( BASE_PATH. DIRECTORY_SEPARATOR. 'autoload.php');
+/*
+exit();
+function my_autoloader($class)
+{
+    $filename = BASE_PATH . '/lib/' . str_replace('\\', '/', $class) . '.php';
+    include($filename);
+}
+spl_autoload_register('Migrations');
+*/
+
+use Cake\Console\Shell;
 use Cake\Utility\Security;
 use Composer\Script\Event;
+use Composer\Installer\PackageEvent;
 use Exception;
 
 /**
@@ -24,6 +38,8 @@ use Exception;
  */
 class PluginCoreInstaller
 {
+
+    public static $ioPrefix = 'PygonGit\PluginCore: ';
 
     /**
      * Does some routine installation tasks so people don't have to.
@@ -34,10 +50,8 @@ class PluginCoreInstaller
      */
     public static function postInstall(Event $event)
     {
-        $io = $event->getIO();
-
         $rootDir = dirname(dirname(dirname(dirname(dirname(__DIR__)))));
-        $io->write('PygonGit\PluginCore: $rootDir: '+$rootDir);
+        static::ioWrite($event, ' $rootDir: '.$rootDir);
 
         require $rootDir.DIRECTORY_SEPARATOR."config".DIRECTORY_SEPARATOR."paths.php";
 
@@ -48,7 +62,7 @@ class PluginCoreInstaller
             \Cake\Codeception\Console\Installer::customizeCodeceptionBinary($event);
         }
 
-        $io->write('PygonGit\PluginCore is installed.');
+        static::ioWrite($event, 'Installed.');
     }
 
     /**
@@ -60,10 +74,8 @@ class PluginCoreInstaller
      */
     public static function postUpdate(Event $event)
     {
-        $io = $event->getIO();
-
         $rootDir = dirname(dirname(dirname(dirname(dirname(__DIR__)))));
-        $io->write('PygonGit\PluginCore: $rootDir: '+$rootDir);
+        static::ioWrite($event, ' $rootDir: '.$rootDir);
 
         require $rootDir.DIRECTORY_SEPARATOR."config".DIRECTORY_SEPARATOR."paths.php";
 
@@ -74,7 +86,7 @@ class PluginCoreInstaller
             \Cake\Codeception\Console\Installer::customizeCodeceptionBinary($event);
         }
 
-        $io->write('PygonGit\PluginCore is updated.');
+        static::ioWrite($event, 'Updated');
     }
 
     /**
@@ -85,8 +97,7 @@ class PluginCoreInstaller
      */
     public static function linkVendorAssets(Event $event)
     {
-        $io = $event->getIO();
-        $io->write('Checking Vendor Assets');
+        static::ioWrite($event, 'Checking Vendor Assets');
 
         $isLinked = false;
 
@@ -104,42 +115,54 @@ class PluginCoreInstaller
 
         if($isLinked)
         {
-            $io->write('Relinking Vendor Assets');
+            static::ioWrite($event, 'Relinking Vendor Assets');
             unlink(WWW_ROOT.DS.'assets');
         }
-        else
-        {
-            $io->write('Linking Vendor Assets');
-
-            symlink(ROOT.DS.'vendor', WWW_ROOT.DS.'assets');
-        }
+        static::ioWrite($event, 'Linking Vendor Assets');
+        symlink('..'.DS.'vendor', WWW_ROOT.DS.'assets');
 
     }
 
     /**
      * Create the config/user.php file if it does not exist.
      *
+     * @param \Composer\Script\Event $event
      * @param string $dir The application's root directory.
      * @return void
      */
     public static function createUserConfig(Event $event, $dir)
     {
-        $io = $event->getIO();
-        $io->write('Checking Users Config');
+        static::ioWrite($event, 'Checking Users Config ');
 
         $rootDir = dirname(dirname(dirname(dirname(dirname(__DIR__)))));
-        $io->write('PygonGit\PluginCore: $rootDir: '+$rootDir);
+        static::ioWrite($event, '$rootDir: '.$rootDir);
 
         $appConfig = $dir.DS.'config'.DS.'users.php';
         $defaultConfig = $rootDir.DS.'config'.DS.'users.default.php';
         if (!file_exists($appConfig))
         {
             copy($defaultConfig, $appConfig);
-            $io->write('Created `config/users.php` file');
+            static::ioWrite($event, 'Created `config/users.php` file');
         }
         else
         {
-            $io->write('`config/users.php` file already exists.');
+            static::ioWrite($event, '`config/users.php` file already exists.');
         }
+    }
+
+    /**
+     * Write out information in a standard format.
+     *
+     * @param \Composer\Script\Event $event
+     * @param string $msg The message to write
+     * @return void
+     */
+    public static function ioWrite(Event $event, $msg = '')
+    {
+        // track what called me
+        $backtrace = debug_backtrace();
+        $function = (isset($backtrace[1]['function'])?$backtrace[1]['function']:'unknown');
+        $io = $event->getIO();
+        $io->write(sprintf('%s - %s: %s', static::$ioPrefix, $function, $msg));
     }
 }

@@ -34,14 +34,11 @@ class Installer
      */
     public static function postInstall(Event $event)
     {
-        static::linkVendorAssets($event);
     }
 
     public static function postUpdate(Event $event)
     {
         $io = $event->getIO();
-
-        static::linkVendorAssets($event);
 
         $io->write('We are updated.');
     }
@@ -55,6 +52,5 @@ class Installer
      */
     public static function linkVendorAssets(Event $event)
     {
-        $this->out('We were called');
     }
 }

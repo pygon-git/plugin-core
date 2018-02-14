@@ -22,10 +22,8 @@
         "cakephp/migrations": "~1.0",
         "cakephp/plugin-installer": "~1.0",
         "josegonzalez/dotenv": "2.*",
-        "friendsofcake/bootstrap-ui": "^1.2",
         "twbs/bootstrap": "4.0.0-beta",
         "components/jquery": "^3.2",
-        "cakephp/bake": "^1.4",
         "cakephp/elastic-search": "@stable",
         "fortawesome/font-awesome": "^4.7",
         "cakedc/users": "^5.2",
@@ -35,12 +33,13 @@
         "league/oauth2-linkedin": "@stable",
         "league/oauth1-client": "@stable",
         "google/recaptcha": "@stable",
-        "robthree/twofactorauth": "^1.5.2"
+        "robthree/twofactorauth": "^1.5.2",
+        "pygon-git/cakephp-calendar":"*"
     },
     "require-dev": {
         "psy/psysh": "@stable",
         "cakephp/debug_kit": "~3.2",
-        "cakephp/bake": "~1.1",
+        "cakephp/bake": "^1.4",
         "cakephp/cakephp-codesniffer": "^3.0"
     },
     "autoload": {
@@ -55,13 +54,16 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "\\PygonGit\\PluginCore\\Console\\PluginCoreInstaller::postInstall"
+            "\\PygonGit\\PluginCore\\Console\\PluginCoreInstaller::postInstall",
+            "@post-install-migrations"
         ],
         "post-create-project-cmd": [
-            "\\PygonGit\\PluginCore\\Console\\PluginCoreInstaller::postInstall"
+            "\\PygonGit\\PluginCore\\Console\\PluginCoreInstaller::postInstall",
+            "@post-install-migrations"
         ],
         "post-update-cmd": [
-            "\\PygonGit\\PluginCore\\Console\\PluginCoreInstaller::postUpdate"
+            "\\PygonGit\\PluginCore\\Console\\PluginCoreInstaller::postUpdate",
+            "@post-update-migrations"
         ],
         "post-autoload-dump": "Cake\\Composer\\Installer\\PluginInstaller::postAutoloadDump",
         "check": [
@@ -70,6 +72,24 @@
         ],
         "cs-check": "phpcs --colors -p --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./src ./tests",
         "cs-fix": "phpcbf --colors --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./src ./tests",
-        "test": "phpunit --colors=always"
+        "test": "phpunit --colors=always",
+        "post-install-migrations": [
+            "######################## Migrate the database to the latest schema",
+            "`pwd`/../../../bin/cake migrations migrate -p CakeDC/Users",
+            "`pwd`/../../../bin/cake migrations migrate -p PygotGit/Calendar",
+            "`pwd`/../../../bin/cake migrations migrate -p PygonGit/PluginCore",
+            "`pwd`/../../../bin/cake migrations migrate",
+            "######################## Seed the database for a new install",
+            "`pwd`/../../../bin/cake migrations seed -p CakeDC/Users",
+            "`pwd`/../../../bin/cake migrations seed -p PygotGit/Calendar",
+            "`pwd`/../../../bin/cake migrations seed -p PygonGit/PluginCore",
+            "`pwd`/../../../bin/cake migrations seed"
+        ],
+        "post-update-migrations": [
+            "######################## Migrate the database to the latest schema",
+            "`pwd`/../../../bin/cake migrations migrate -p CakeDC/Users",
+            "`pwd`/../../../bin/cake migrations migrate -p PygonGit/PluginCore",
+            "`pwd`/../../../bin/cake migrations migrate"
+        ]
     }
 }
